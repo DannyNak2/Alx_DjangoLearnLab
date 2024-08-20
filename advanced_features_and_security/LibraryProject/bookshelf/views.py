@@ -32,3 +32,10 @@ def book_delete(request, pk):
     return render(request, 'relationship_app/book_confirm_delete.html', {'book': book})
 
 
+def search_books(request):
+    query = request.GET.get('q')
+    if query:
+        books = Book.objects.filter(title__icontains=query)
+    else:
+        books = Book.objects.all()
+    return render(request, 'bookshelf/book_list.html', {'books': books})
