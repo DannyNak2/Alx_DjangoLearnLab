@@ -1,0 +1,36 @@
+<!-- bookshelf/templates/bookshelf/book_list.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book List</title>
+    <!-- Security headers -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; style-src 'self' https://fonts.googleapis.com; script-src 'self'">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&display=swap">
+</head>
+<body>
+    <h1>Book List</h1>
+
+    <!-- Optional: Search form with CSRF protection -->
+    <form method="GET" action="{% url 'book_list' %}">
+        <input type="text" name="q" placeholder="Search books..." value="{{ request.GET.q }}">
+        <button type="submit">Search</button>
+    </form>
+
+    <ul>
+        {% for book in books %}
+        <li>
+            <strong>{{ book.title }}</strong> by {{ book.author }} (Published on {{ book.published_date }})
+        </li>
+        {% empty %}
+        <li>No books found.</li>
+        {% endfor %}
+    </ul>
+
+    <!-- Link to add a new book (example) -->
+    {% if user.has_perm('relationship_app.can_create') %}
+    <a href="{% url 'book_create' %}">Add a new book</a>
+    {% endif %}
+</body>
+</html>
