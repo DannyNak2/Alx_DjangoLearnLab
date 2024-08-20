@@ -128,6 +128,13 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 # advanced_features_and_security/settings.py
 AUTH_USER_MODEL = 'bookshelf.CustomUser'
 
+# Redirect all HTTP requests to HTTPS
+SECURE_SSL_REDIRECT = True
+
+# HTTP Strict Transport Security (HSTS) settings
+SECURE_HSTS_SECONDS = 31536000  # 1 year
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
+SECURE_HSTS_PRELOAD = True
 
 # Security settings
 SECURE_BROWSER_XSS_FILTER = True
@@ -142,3 +149,12 @@ SESSION_COOKIE_SECURE = True
 CSP_DEFAULT_SRC = ("'self'",)
 CSP_STYLE_SRC = ("'self'", 'https://fonts.googleapis.com')
 CSP_SCRIPT_SRC = ("'self'", 'https://apis.google.com')
+
+# Prevent clickjacking by not allowing the site to be framed
+X_FRAME_OPTIONS = 'DENY'
+
+# Prevent MIME-type sniffing
+SECURE_CONTENT_TYPE_NOSNIFF = True
+
+# Enable XSS protection
+SECURE_BROWSER_XSS_FILTER = True
