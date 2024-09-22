@@ -141,6 +141,8 @@ REST_FRAMEWORK = {
     ],
 }
 
-PORT = 
+PORT = 8000
 
-STATIC_ROOT = 
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+
+import os
